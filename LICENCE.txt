@@ -1,0 +1,7 @@
+Akeneo frontend metrics
+
+The Open Software License version 3.0
+
+Copyright (c) 2013-2021, Akeneo SAS.
+
+Full license is at: https://opensource.org/licenses/OSL-3.0

@@ -1,0 +1,54 @@
+name: Deploy to GitHub pages
+on:
+  push:
+    branches:
+      - master
+      - handlemultireport
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  master:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the current branch
+        uses: actions/checkout@v2
+
+      - name: Install node 14.18 for the rest of the workflow
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.18
+
+      - name: Install node modules
+        run: yarn install
+
+      - name: Generate report name
+        run: echo "::set-output name=report_name::$(date +%F)"
+        id: generate_report_name
+
+      - name: Checkout community repo
+        uses: actions/checkout@v2
+        with:
+            repository: akeneo/pim-community-dev
+            path: code/community
+
+      - name: Checkout enterprise repo
+        uses: actions/checkout@v2
+        with:
+            repository: akeneo/pim-enterprise-dev
+            path: code/enterprise
+            token: ${{ secrets.TOCKEN_FOR_ENTERPRISE }}
+
+      - name: Generate report
+        run: yarn report:generate ./code ${{steps.generate_report_name.outputs.report_name}}
+
+      - name: Build CRA
+        run: yarn run build
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+          keep_files: true
+          exclude_assets: ''
