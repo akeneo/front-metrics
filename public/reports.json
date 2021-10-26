@@ -1,0 +1,62 @@
+[
+  {
+    "type": "directory",
+    "directoryPath": "../pim-enterprise-dev",
+    "path": "../pim-enterprise-dev/src",
+    "name": "src",
+    "metrics": {
+      "typescript": 1221,
+      "javascript": 66,
+      "typescriptLOC": 76361,
+      "javascriptLOC": 5348,
+      "requireInJavascript": 3,
+      "requireInTypescript": 255,
+      "defineInJavascript": 66,
+      "reactClassComponent": 33,
+      "bemInTypescript": 76,
+      "reactController": 5,
+      "backboneController": 9
+    },
+    "reportName": "2021-10-26"
+  },
+  {
+    "type": "directory",
+    "directoryPath": "../pim-enterprise-dev",
+    "path": "../pim-enterprise-dev/src",
+    "name": "src",
+    "metrics": {
+      "typescript": 1221,
+      "javascript": 66,
+      "typescriptLOC": 76361,
+      "javascriptLOC": 5348,
+      "requireInJavascript": 3,
+      "requireInTypescript": 255,
+      "defineInJavascript": 66,
+      "reactClassComponent": 33,
+      "bemInTypescript": 76,
+      "reactController": 5,
+      "backboneController": 9
+    },
+    "reportName": "2021-10-25"
+  },
+  {
+    "type": "directory",
+    "directoryPath": "../pim-enterprise-dev",
+    "path": "../pim-enterprise-dev/src",
+    "name": "src",
+    "metrics": {
+      "typescript": 1221,
+      "javascript": 66,
+      "typescriptLOC": 76361,
+      "javascriptLOC": 5348,
+      "requireInJavascript": 3,
+      "requireInTypescript": 255,
+      "defineInJavascript": 66,
+      "reactClassComponent": 33,
+      "bemInTypescript": 76,
+      "reactController": 5,
+      "backboneController": 9
+    },
+    "reportName": "2021-10-24"
+  }
+]

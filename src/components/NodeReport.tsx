@@ -16,6 +16,7 @@ import {getReportFromFolder, Report, ReportRoot} from '../model/Report';
 import {NodeSummary} from './NodeSummary';
 import {ColoredCell, getLevelForRatio} from './ColorCell';
 import {useSortedChildren} from '../hooks/useSortedChildren';
+import {NodeCharts} from "./NodeCharts";
 
 const Header = styled.div`
   display: flex;
@@ -45,7 +46,8 @@ type NodeReportProps = {
 
 const NodeReport = ({report, reportName, reports, onReportChange}: NodeReportProps) => {
   const {url} = useRouteMatch();
-  const folders = url.split('/').slice(1);
+  const path = url.substring(1);
+  const folders = !path ? [] : path.split('/');
   const currentNode = getReportFromFolder(report, folders);
   const [sortedChildren, computeDirection, handleDirectionChange] = useSortedChildren(
     'file' === currentNode.type ? [] : Object.values(currentNode.children)
@@ -219,6 +221,7 @@ const NodeReport = ({report, reportName, reports, onReportChange}: NodeReportPro
           })}
         </Table.Body>
       </Table>
+      {folders.length === 0 && <NodeCharts reportRoots={reports}/>}
     </>
   );
 };
