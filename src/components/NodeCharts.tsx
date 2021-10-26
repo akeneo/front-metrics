@@ -16,7 +16,7 @@ type NodeChartsProps = {
 
 const NodeCharts = ({reportRoots}: NodeChartsProps) => {
   const metrics: {[metricCode: string]: string} = {
-    'typescriptLOC': 'Javascript line of code',
+    'typescriptLOC': 'Typescript line of code',
     'javascriptLOC': 'Javascript line of code',
     'requireInJavascript': 'Require in javascript',
     'requireInTypescript': 'Require in typescript',

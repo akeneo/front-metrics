@@ -3,9 +3,8 @@ on:
   push:
     branches:
       - master
-      - handlemultireport
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 0 * * SUN'
 
 jobs:
   master:
@@ -51,4 +50,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
           keep_files: true
-          exclude_assets: ''
