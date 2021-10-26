@@ -19,10 +19,6 @@ jobs:
       - name: Install node modules
         run: yarn install
 
-      - name: Generate report name
-        run: echo "::set-output name=report_name::$(date +%F)"
-        id: generate_report_name
-
       - name: Build CRA
         run: yarn run build
 
@@ -32,4 +28,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
           keep_files: true
-          exclude_assets: ''
