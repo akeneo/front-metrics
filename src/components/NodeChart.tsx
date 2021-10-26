@@ -13,6 +13,7 @@ type NodeChartProps = {
   reportRoots: ReportRoot[];
   metric: keyof ReportMetric;
   label: string;
+  description: string;
 };
 
 const computeData = (reportRoots: ReportRoot[], metric: keyof ReportMetric) => {
@@ -24,13 +25,15 @@ const computeData = (reportRoots: ReportRoot[], metric: keyof ReportMetric) => {
   });
 };
 
-const NodeChart = ({reportRoots, label, metric}: NodeChartProps) => {
+const NodeChart = ({reportRoots, label, description, metric}: NodeChartProps) => {
   const computedData = computeData(reportRoots, metric);
 
   return (
     <NodeChartContainer>
       <SectionTitle>
         <SectionTitle.Title>{label}</SectionTitle.Title>
+        <SectionTitle.Spacer />
+        <SectionTitle.Information>{description}</SectionTitle.Information>
       </SectionTitle>
       <ResponsiveContainer width="95%" height={400}>
         <LineChart data={computedData}>

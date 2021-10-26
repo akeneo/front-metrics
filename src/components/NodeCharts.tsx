@@ -15,15 +15,42 @@ type NodeChartsProps = {
 };
 
 const NodeCharts = ({reportRoots}: NodeChartsProps) => {
-  const metrics: {[metricCode: string]: string} = {
-    typescriptLOC: 'Typescript line of code',
-    javascriptLOC: 'Javascript line of code',
-    requireInJavascript: 'Require in javascript',
-    requireInTypescript: 'Require in typescript',
-    reactClassComponent: 'React classes',
-    bemInTypescript: 'BEM in typescript',
-    reactController: 'Legacy bridges',
-    backboneController: 'Backbone controllers',
+  const metrics: {[metricCode: string]: {label: string; description: string}} = {
+    typescriptLOC: {
+      label: 'TypeScript LOC',
+      description: '(should go up)',
+    },
+    javascriptLOC: {
+      label: 'JavaScript LOC',
+      description: '(should go down)',
+    },
+    requireInJavascript: {
+      label: 'Require in javascript',
+      description: '',
+    },
+    requireInTypescript: {
+      label: 'Require in TypeScript',
+      description:
+        'Using require in a typescript file, shows that a new feature is coupled with a legacy module (should go down)',
+    },
+    reactClassComponent: {
+      label: 'React classes',
+      description:
+        'This is the old way of doing React components. This is not high priority but those component should disapear eventualy (should go down)',
+    },
+    bemInTypescript: {
+      label: 'BEM in typescript',
+      description:
+        'BEM is our legacy design system and should not be used anymore. The DSM should be used instead (should go down)',
+    },
+    reactController: {
+      description: `It's a way to integrate a React app in a Backbone app (should go down)`,
+      label: 'Legacy bridges',
+    },
+    backboneController: {
+      description: 'Every Backbone Controller represent a page in the PIM using Backbone (should go down)',
+      label: 'Backbone controllers',
+    },
   };
 
   return (
@@ -31,7 +58,8 @@ const NodeCharts = ({reportRoots}: NodeChartsProps) => {
       {Object.keys(metrics).map(metric => (
         <NodeChart
           metric={metric as keyof ReportMetric}
-          label={metrics[metric]}
+          label={metrics[metric].label}
+          description={metrics[metric].description}
           reportRoots={reportRoots}
           key={metric}
         />
