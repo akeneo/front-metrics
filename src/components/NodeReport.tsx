@@ -16,7 +16,8 @@ import {getReportFromFolder, Report, ReportRoot} from '../model/Report';
 import {NodeSummary} from './NodeSummary';
 import {ColoredCell, getLevelForRatio} from './ColorCell';
 import {useSortedChildren} from '../hooks/useSortedChildren';
-import {NodeCharts} from "./NodeCharts";
+import {NodeCharts} from './NodeCharts';
+import {useMemo} from 'react';
 
 const Header = styled.div`
   display: flex;
@@ -54,6 +55,14 @@ const NodeReport = ({report, reportName, reports, onReportChange}: NodeReportPro
   );
   const [isDropdownOpen, openDropdown, closeDropdown] = useBooleanState();
 
+  const sortedReportList = useMemo(() => {
+    const sortedReports = [...reports].sort((first: ReportRoot, second: ReportRoot) =>
+      second.reportName.localeCompare(first.reportName)
+    );
+
+    return sortedReports;
+  }, [reports]);
+
   if ('file' === currentNode.type) {
     return null;
   }
@@ -80,7 +89,7 @@ const NodeReport = ({report, reportName, reports, onReportChange}: NodeReportPro
                 <Dropdown.Title>Reports</Dropdown.Title>
               </Dropdown.Header>
               <Dropdown.ItemCollection>
-                {reports.map(report => (
+                {sortedReportList.map(report => (
                   <Dropdown.Item
                     key={report.reportName}
                     onClick={() => {
@@ -221,7 +230,7 @@ const NodeReport = ({report, reportName, reports, onReportChange}: NodeReportPro
           })}
         </Table.Body>
       </Table>
-      {folders.length === 0 && <NodeCharts reportRoots={reports}/>}
+      {folders.length === 0 && <NodeCharts reportRoots={reports} />}
     </>
   );
 };
