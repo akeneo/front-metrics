@@ -34,7 +34,7 @@ type Report = {
 );
 
 const getReportFromFolder = (report: Report, folders: string[]): Report => {
-  if (0 === folders.length || folders.every(folder => folder === '')) {
+  if (0 === folders.length) {
     return report;
   }
 
