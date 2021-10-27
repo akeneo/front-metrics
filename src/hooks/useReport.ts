@@ -12,7 +12,7 @@ const useReport = () => {
       const reports = await response.json();
 
       setReports(reports);
-      setCurrentReportName(reports[0].reportName);
+      setCurrentReportName(reports[reports.length - 1].reportName);
     })();
   }, []);
 
