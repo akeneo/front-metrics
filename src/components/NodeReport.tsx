@@ -147,6 +147,13 @@ const NodeReport = ({report, reportName, reports, onReportChange}: NodeReportPro
           </Table.HeaderCell>
           <Table.HeaderCell
             isSortable={true}
+            onDirectionChange={handleDirectionChange('reactRender')}
+            sortDirection={computeDirection('reactRender')}
+          >
+            React.render
+          </Table.HeaderCell>
+          <Table.HeaderCell
+            isSortable={true}
             onDirectionChange={handleDirectionChange('reactController')}
             sortDirection={computeDirection('reactController')}
           >
@@ -222,6 +229,9 @@ const NodeReport = ({report, reportName, reports, onReportChange}: NodeReportPro
                 </ColoredCell>
                 <ColoredCell color={[0 < child.metrics.bemInTypescript ? 'danger' : 'primary', 40]}>
                   {child.metrics.bemInTypescript}
+                </ColoredCell>
+                <ColoredCell color={[0 < (child.metrics.reactRender ?? 0) ? 'danger' : 'primary', 40]}>
+                  {child.metrics.reactRender ?? 'N/A'}
                 </ColoredCell>
                 <Table.Cell>{child.metrics.reactController}</Table.Cell>
                 <Table.Cell>{child.metrics.backboneController}</Table.Cell>
