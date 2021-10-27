@@ -96,7 +96,6 @@ const NodeChart = ({reportRoots, label, description, metric}: NodeChartProps) =>
     }));
   }
 
-  console.log(zoomState.left, zoomState.right);
   const zoomOut = () => {
     setZoomState(() => ({
       rangeSelection: {
