@@ -41,8 +41,6 @@ jobs:
       - name: Build CRA
         run: yarn run build
 
-        # TODO: move generated files to build folder
-
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
