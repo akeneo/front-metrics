@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useMemo, useState} from "react";
 import styled from 'styled-components';
 import {Line, LineChart, ReferenceArea, ResponsiveContainer, Tooltip, XAxis, YAxis} from 'recharts';
 import {Button, SectionTitle} from 'akeneo-design-system';
@@ -25,30 +25,27 @@ type RechartsMouseInfoEvent = {
   chartY: number;
 }
 
-const computeData = (reportRoots: ReportRoot[], metric: keyof ReportMetric): {value: number, time: string}[] => {
+const computeData = (reportRoots: ReportRoot[], metric: keyof ReportMetric) => {
   return reportRoots.map(reportRoot => {
     return {
       value: reportRoot.metrics[metric],
-      time: reportRoot.reportName,
+      time: new Date(reportRoot.reportName).getTime(),
     };
   });
 };
 
 type ZoomState = {
   rangeSelection: {
-    start: null | string,
-    end: null | string,
+    start: null | number,
+    end: null | number,
   },
-  left: string,
-  right: string,
+  left: string | number,
+  right: string | number,
   top: string | number,
 }
 
 const NodeChart = ({reportRoots, label, description, metric}: NodeChartProps) => {
-  const computedData = computeData(reportRoots, metric).sort((a, b) => {
-    return new Date(a.time).getTime() - new Date(b.time).getTime();
-  });
-
+  const computedData = useMemo(() => computeData(reportRoots, metric), [reportRoots, metric]);
   const [zoomState, setZoomState] = useState<ZoomState>({
     rangeSelection: {
       start: null,
@@ -82,9 +79,8 @@ const NodeChart = ({reportRoots, label, description, metric}: NodeChartProps) =>
       return;
     }
 
-    const isInvertedSelection = zoomState.rangeSelection.start > zoomState.rangeSelection.end;
-    const left = isInvertedSelection ? zoomState.rangeSelection.end : zoomState.rangeSelection.start;
-    const right = isInvertedSelection ? zoomState.rangeSelection.start : zoomState.rangeSelection.end;
+    const left = Math.min(zoomState.rangeSelection.start, zoomState.rangeSelection.end);
+    const right = Math.max(zoomState.rangeSelection.start, zoomState.rangeSelection.end);
 
     const filteredValues = computedData.filter((data) => data.time > left && data.time < right);
     const values = filteredValues.map((data) => data.value);
@@ -116,7 +112,7 @@ const NodeChart = ({reportRoots, label, description, metric}: NodeChartProps) =>
   return (
     <NodeChartContainer>
       <SectionTitle>
-        <SectionTitle.Title>{label} - {zoomState.left} to {zoomState.right}</SectionTitle.Title>
+        <SectionTitle.Title>{label}</SectionTitle.Title>
         <SectionTitle.Spacer />
         <SectionTitle.Information>{description}</SectionTitle.Information>
         <SectionTitle.Separator />
@@ -134,11 +130,12 @@ const NodeChart = ({reportRoots, label, description, metric}: NodeChartProps) =>
             domain={[zoomState.left, zoomState.right]}
             dataKey="time"
             name="Time"
-            //tickFormatter={time => new Date(time).toLocaleDateString('en-US')}
+            tickFormatter={time => new Date(time).toLocaleDateString('en-US')}
+            type='number'
           />
           <YAxis allowDataOverflow={true} dataKey="value" name="Value" domain={[0, zoomState.top]}/>
-          <Tooltip isAnimationActive={false}/>
-          <Line type="natural" dataKey="value" stroke="#8884d8" dot={false} isAnimationActive={false}/>
+          <Tooltip isAnimationActive={false} labelFormatter={(time: number) => new Date(time).toLocaleDateString('en-US')}/>
+          <Line type="monotone" dataKey="value" stroke="#8884d8" dot={false} isAnimationActive={false}/>
           {null !== zoomState.rangeSelection.start && null !== zoomState.rangeSelection.end ? (
             <ReferenceArea
               x1={zoomState.rangeSelection.start}
