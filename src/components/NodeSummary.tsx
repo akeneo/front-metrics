@@ -75,6 +75,12 @@ const NodeSummary = ({report}: NodeSummaryProps) => {
         content="BEM in typescript"
       />
       <ColoredIconCard
+        color={[0 < (report.metrics.reactRender ?? 0) ? 'danger' : 'primary', 60]}
+        label={(report.metrics.reactRender ?? 0).toString()}
+        icon={<EntityMultiIcon />}
+        content="React.render"
+      />
+      <ColoredIconCard
         color={[0 < report.metrics.reactController ? 'danger' : 'primary', 60]}
         label={report.metrics.reactController.toString()}
         icon={<FactoryIcon />}

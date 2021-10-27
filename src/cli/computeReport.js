@@ -137,6 +137,7 @@ const getFileMetrics = (filePath) => {
     const defineInJavascript = isJavascript ? countOccurrences(fileContent, /define\(/g) : 0;
     const reactClassComponent = countOccurrences(fileContent, /extends React.Component/g);
     const reactController = countOccurrences(fileContent, /extends ReactController/g);
+    const reactRender = countOccurrences(fileContent, /ReactDOM\.render/g);
     const backboneController = countOccurrences(fileContent, /extends BaseController/g) + countOccurrences(fileContent, /BaseController.extend/g);
 
     const bemInTypescript = isTypescript && (
@@ -157,11 +158,10 @@ const getFileMetrics = (filePath) => {
         reactClassComponent,
         bemInTypescript,
         reactController,
+        reactRender,
         backboneController,
     };
 };
-
-
 
 const computeReport = (sourceFolder, name) => {
   const directoryPath = path.dirname(sourceFolder);

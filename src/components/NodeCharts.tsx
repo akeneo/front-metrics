@@ -43,6 +43,10 @@ const NodeCharts = ({reportRoots}: NodeChartsProps) => {
       description:
         'BEM is our legacy design system and should not be used anymore. The DSM should be used instead (should go down)',
     },
+    reactRender: {
+      label: 'React render',
+      description: 'This metric show every time we boot a react app (should go down)',
+    },
     reactController: {
       description: `It's a way to integrate a React app in a Backbone app (should go down)`,
       label: 'Legacy bridges',

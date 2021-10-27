@@ -8,6 +8,7 @@ type ReportMetric = {
   defineInJavascript: number;
   reactClassComponent: number;
   bemInTypescript: number;
+  reactRender: number;
   reactController: number;
   backboneController: number;
 };
