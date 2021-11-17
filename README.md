@@ -1,4 +1,4 @@
-[![Generate report](https://github.com/akeneo/front-metrics/actions/workflows/generate_report.yml/badge.svg)](https://github.com/akeneo/front-metrics/actions/workflows/generate_report.yml)
+[![Deploy to GitHub pages](https://github.com/akeneo/front-metrics/actions/workflows/deploy.yml/badge.svg)](https://github.com/akeneo/front-metrics/actions/workflows/deploy.yml) [![Generate report](https://github.com/akeneo/front-metrics/actions/workflows/generate_report.yml/badge.svg)](https://github.com/akeneo/front-metrics/actions/workflows/generate_report.yml)
 
 # Getting Started with Create React App
 
