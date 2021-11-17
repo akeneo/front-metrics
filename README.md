@@ -1,3 +1,5 @@
+[![Generate report](https://github.com/akeneo/front-metrics/actions/workflows/generate_report.yml/badge.svg)](https://github.com/akeneo/front-metrics/actions/workflows/generate_report.yml)
+
 # Getting Started with Create React App
 
 This project is intended to explore Akeneo PIM codebase.
