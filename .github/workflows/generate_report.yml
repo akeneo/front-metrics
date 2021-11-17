@@ -33,7 +33,7 @@ jobs:
         with:
             repository: akeneo/pim-enterprise-dev
             path: code/enterprise
-            token: ${{ secrets.TOCKEN_FOR_ENTERPRISE }}
+            token: ${{ secrets.TOKEN_FOR_ENTERPRISE }}
 
       - name: Generate report
         run: yarn report:generate ./code ${{steps.generate_report_name.outputs.report_name}}
