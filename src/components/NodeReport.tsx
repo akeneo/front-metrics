@@ -9,6 +9,7 @@ import {
   SwitcherButton,
   Table,
   useBooleanState,
+  ViewIcon,
 } from 'akeneo-design-system';
 import {Link, useRouteMatch} from 'react-router-dom';
 import styled from 'styled-components';
@@ -180,14 +181,19 @@ const NodeReport = ({report, reportName, reports, onReportChange}: NodeReportPro
                 <SpacedCell>
                   {'file' === child.type ? <FileIcon size={20} /> : <FolderIcon size={20} />}&nbsp;&nbsp;
                   {'file' === child.type ? child.name : <Link to={childUrl}>{child.name}</Link>}
-                  <IconButton
-                    size="small"
-                    ghost="borderless"
-                    level="tertiary"
-                    icon={<CopyIcon />}
-                    title="Copy to clipboard"
-                    onClick={() => copyToClipboard(child.path)}
-                  />
+                  <a
+                    href={child.path
+                      .replace('/enterprise/', 'https://github.com/akeneo/pim-enterprise-dev/blob/master/')
+                      .replace('/community/', 'https://github.com/akeneo/pim-community-dev/blob/master/')}
+                  >
+                    <IconButton
+                      size="small"
+                      ghost="borderless"
+                      level="tertiary"
+                      icon={<ViewIcon />}
+                      title="Open in github"
+                    />
+                  </a>
                   <Spacer />
                   {'directory' === child.type && (
                     <Badge>
