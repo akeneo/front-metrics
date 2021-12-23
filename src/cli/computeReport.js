@@ -142,7 +142,7 @@ const getFileMetrics = (filePath) => {
 
     const bemInTypescript = isTypescript && (
         -1 !== fileContent.indexOf(`className='Akn`) ||
-        -1 !== fileContent.indexOf(`className='Akn`) ||
+        -1 !== fileContent.indexOf(`className="Akn`) ||
         -1 !== fileContent.indexOf(`className={\`Akn`)) ? 1 : 0;
 
     const loc = parseInt(execSync(`wc -l ${filePath}`).toString().trim());
