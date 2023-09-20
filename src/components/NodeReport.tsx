@@ -1,7 +1,6 @@
 import {
   Badge,
   Breadcrumb,
-  CopyIcon,
   Dropdown,
   FileIcon,
   FolderIcon,
@@ -23,10 +22,6 @@ import {useMemo} from 'react';
 const Header = styled.div`
   display: flex;
 `;
-
-const canCopyToClipboard = (): boolean => 'clipboard' in navigator;
-
-const copyToClipboard = (text: string) => canCopyToClipboard() && navigator.clipboard.writeText(text);
 
 const SpacedCell = styled(Table.Cell)`
   & > div {
