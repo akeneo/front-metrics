@@ -8,10 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the current branch
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Install node 14.18 for the rest of the workflow
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: 14.18
 
@@ -23,13 +23,13 @@ jobs:
         id: generate_report_name
 
       - name: Checkout community repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
             repository: akeneo/pim-community-dev
             path: code/community
 
       - name: Checkout enterprise repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
             repository: akeneo/pim-enterprise-dev
             path: code/enterprise
